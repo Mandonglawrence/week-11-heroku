@@ -184,7 +184,7 @@ const Mutation = new GraphQLObjectType({
           bcrypt.hash(password, 1).then((password) => {
             data = { username, password };
             const user = new User(data);
-            user.save();
+            return user.save();
           });
           return data;
         } catch {
