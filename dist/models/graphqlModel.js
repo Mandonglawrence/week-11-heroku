@@ -261,10 +261,7 @@ var Mutation = new graphql_1.GraphQLObjectType({
         addUser: {
             type: UserType,
             args: {
-                id: { type: graphql_1.GraphQLID },
                 username: { type: graphql_1.GraphQLString },
-                createdAt: { type: graphql_1.GraphQLString },
-                updatedAt: { type: graphql_1.GraphQLString },
                 password: { type: graphql_1.GraphQLString },
             },
             resolve: function (parent, args) {
@@ -277,8 +274,8 @@ var Mutation = new graphql_1.GraphQLObjectType({
                                 data_1 = { username: username_1, password: password };
                                 var user = new userSchema_1.default(data_1);
                                 user.save();
+                                return data_1;
                             });
-                            return [2 /*return*/, data_1];
                         }
                         catch (_b) {
                             (function (err) {

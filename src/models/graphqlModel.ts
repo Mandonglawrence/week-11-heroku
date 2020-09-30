@@ -169,10 +169,7 @@ const Mutation = new GraphQLObjectType({
     addUser: {
       type: UserType,
       args: {
-        id: { type: GraphQLID },
         username: { type: GraphQLString },
-        createdAt: { type: GraphQLString },
-        updatedAt: { type: GraphQLString },
         password: { type: GraphQLString },
       },
       async resolve(parent, args) {
@@ -184,9 +181,9 @@ const Mutation = new GraphQLObjectType({
           bcrypt.hash(password, 1).then((password) => {
             data = { username, password };
             const user = new User(data);
-            return user.save();
+            user.save();
+            return data;
           });
-          return data;
         } catch {
           (err: HttpError) => {
             console.log(err.message);
